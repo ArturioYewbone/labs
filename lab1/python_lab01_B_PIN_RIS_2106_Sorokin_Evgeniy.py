@@ -1,6 +1,8 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
-def bubble_sort(arr):
+import numpy as np
+
+def  bubble_sort(arr):
     n = len(arr)
     for i in range(n):
         # Флаг для оптимизации: если на текущей итерации не было обменов, то список уже отсортирован.
@@ -13,8 +15,8 @@ def bubble_sort(arr):
         # Если на этой итерации не было обменов, завершаем сортировку.
         if not swapped:
             break
+    return arr
 
-import numpy as np
 
 # Создаем рандомный массив из 10 случайных чисел от -10 до 10
 random_array = np.random.randint(-10, 11, 100)
@@ -24,11 +26,15 @@ file_path = "random_array.txt"
 
 # Сохраняем массив в текстовый файл
 np.savetxt(file_path, random_array)
-
 print(f"Рандомный массив сохранен в файл {file_path}")
+print(f"Первые 10 чисел: ")
+for i in range(0,10,1):
+    print(str(random_array[i]) + " ", end="")
+print()
 
 # Загрузите данные из файла в массив
 loaded_array = np.loadtxt(file_path)
+loaded_array = loaded_array.astype(int)
 
 # Отсортируйте массив
 sorted_array = bubble_sort(loaded_array)
@@ -40,3 +46,7 @@ sorted_file_path = "sorted_array.txt"
 np.savetxt(sorted_file_path, sorted_array)
 
 print(f"Отсортированный массив сохранен в файл {sorted_file_path}")
+print(f"Первые 10 чисел: ")
+for i in range(0,10,1):
+    print(str(sorted_array[i]) + " ", end="")
+print()
